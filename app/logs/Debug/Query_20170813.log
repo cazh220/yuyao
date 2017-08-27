@@ -1,0 +1,5 @@
+# LogFrom:E:/yuyao/app/category.php LogSetPath:Debug/Query #
+
+SELECT * FROM yy_category WHERE is_delete = 0 ORDER BY order ASC;
+SELECT * FROM yy_category WHERE is_delete = 0 ORDER BY order ASC;
+SELECT * FROM yy_category WHERE is_delete = 0 ORDER BY sort ASC;
