@@ -58,6 +58,54 @@ class CategoryInfo
     	
     	return $r;
     }
+    
+    //添加分类
+    public function add_new_category($param=array())
+    {
+    	if($this->db == null || empty($param))
+		{
+    		return false;
+    	}
+    
+    	$sql = "INSERT INTO yy_category SET ";
+    	foreach($param as $key => $value)
+    	{
+    		$sql .= $key." = '".$value."',";
+    	}
+    	$sql .= "create_time = NOW(), update_time = NOW()";
+    	
+    	try{
+    		$res = $this->db->exec($sql);
+    		return true;
+    	}catch(exception $e){
+    		$this->_log(array( __CLASS__ . '.class.php line ' . __LINE__ , 'function '. __FUNCTION__ . ' err:'.$e->getMessage().'  sql execute false. sql = ' . $sql, date("Y-m-d H:i:s")));
+    		return false;
+    	}
+
+    }
+    
+    //编辑分类
+    public function edit_category($param=array(),$cid=0)
+    {
+    	if($this->db == null || empty($param))
+		{
+    		return false;
+    	}
+    
+    	$sql = "UPDATE yy_category SET ";
+    	foreach($param as $key => $value)
+    	{
+    		$sql .= $key." = '".$value."',";
+    	}
+    	$sql .= "update_time = NOW() WHERE cid = ".$cid;
+    	try{
+    		$res = $this->db->exec($sql);
+    		return true;
+    	}catch(exception $e){
+    		$this->_log(array( __CLASS__ . '.class.php line ' . __LINE__ , 'function '. __FUNCTION__ . ' err:'.$e->getMessage().'  sql execute false. sql = ' . $sql, date("Y-m-d H:i:s")));
+    		return false;
+    	}
+    }
 	
 
 	/**

@@ -1,4 +1,4 @@
-<?php /* Smarty version 2.6.10, created on 2017-08-16 01:00:32
+<?php /* Smarty version 2.6.10, created on 2017-09-04 02:37:55
          compiled from index_menu.html */ ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
@@ -118,8 +118,9 @@ $(function(){
 										<?php $_from = $this->_tpl_vars['item']['child']; if (!is_array($_from) && !is_object($_from)) { settype($_from, 'array'); }if (count($_from)):
     foreach ($_from as $this->_tpl_vars['keya'] => $this->_tpl_vars['itema']):
 ?>
-										<li><a href="<?php echo $this->_tpl_vars['itema']['url']; ?>
-" target="navTab" rel="pagination1"><?php echo $this->_tpl_vars['itema']['cname']; ?>
+										<li><a href="category.php?do=addcategory&last_cat_id=<?php echo $this->_tpl_vars['item']['cid']; ?>
+&current_cat_id=<?php echo $this->_tpl_vars['itema']['cid']; ?>
+" target="dialog" rel="dlg_page9" minable="false"><?php echo $this->_tpl_vars['itema']['cname']; ?>
 </a>
 											<?php if ($this->_tpl_vars['itema']['child']): ?>
 											<ul>

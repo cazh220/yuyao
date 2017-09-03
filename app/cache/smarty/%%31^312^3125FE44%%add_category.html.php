@@ -1,13 +1,21 @@
-<?php /* Smarty version 2.6.10, created on 2017-08-16 01:12:31
+<?php /* Smarty version 2.6.10, created on 2017-09-04 02:52:01
          compiled from add_category.html */ ?>
 
 <div class="pageContent">
-	<form method="post" action="demo/common/ajaxDone.html" class="pageForm required-validate" onsubmit="return validateCallback(this, navTabAjaxDone);">
+	<form method="post" action="category.php?do=categoryact" class="pageForm required-validate" onsubmit="return validateCallback(this, navTabAjaxDone);">
 		<div class="pageFormContent" layoutH="56">
 			<p>
 				<label>上级分类</label>
 				<input name="last_category" type="text" size="30" value="<?php echo $this->_tpl_vars['last_category']['cname']; ?>
 " readonly="readonly"/>
+				<input type="hidden" id="last_category_id" name="last_category_id" value="<?php echo $this->_tpl_vars['last_category']['cid']; ?>
+">
+				<input type="hidden" id="last_deepth" name="last_deepth" value="<?php echo $this->_tpl_vars['last_category']['deepth']; ?>
+">
+				<input type="hidden" id="ctype" name="ctype" value="<?php echo $this->_tpl_vars['last_category']['ctype']; ?>
+">
+				<input type="hidden" id="cid" name="cid" value="<?php echo $this->_tpl_vars['current_category']['cid']; ?>
+">
 			</p>
 			<p>
 				<label>分类名称：</label>
@@ -21,7 +29,7 @@
 			</p>
 			<p>
 				<label>分类描述：</label>
-				<input type="text" name="category_desc" size="30" value="<?php echo $this->_tpl_vars['current_category']['desc']; ?>
+				<input type="text" name="category_desc" size="30" value="<?php echo $this->_tpl_vars['current_category']['description']; ?>
 " />
 			</p>
 			<p>

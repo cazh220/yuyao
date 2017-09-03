@@ -108,7 +108,7 @@ $(function(){
 									{if $item.child}
 									<ul>
 										{foreach from=$item.child item=itema key=keya}
-										<li><a href="{$itema.url}" target="navTab" rel="pagination1">{$itema.cname}</a>
+										<li><a href="category.php?do=addcategory&last_cat_id={$item.cid}&current_cat_id={$itema.cid}" target="dialog" rel="dlg_page9" minable="false">{$itema.cname}</a>
 											{if $itema.child}
 											<ul>
 												{foreach from=$itema.child item=itemb key=keyb}
