@@ -45,6 +45,106 @@ class category extends Action {
 		$page->params['template'] = 'add_category.html';
 		$page->output();
 	}
+	
+	//更新分类
+	public function doCategoryAct()
+	{	
+		//print_r($_POST);die;
+		$type 		= intval($_POST['type']);
+		$cname		= $_POST['category_name'] ? trim($_POST['category_name']) : '';
+		$url		= $_POST['category_link'] ? trim($_POST['category_link']) : '';
+		$description = $_POST['category_desc'] ? trim($_POST['category_desc']) : '';
+		$ctype		= $_POST['ctype'] ? intval($_POST['ctype']) : 0;
+		$parent_id	= $_POST['last_category_id'] ? intval($_POST['last_category_id']) : 0;
+		$deepth		= $_POST['deepth'] ? intval($_POST['deepth']) : 0;
+		$cid		= $_POST['cid'] ? intval($_POST['cid']) : 0;
+		
+		importModule("CategoryInfo","class");
+		$obj_category = new CategoryInfo;
+		if($type == 1)
+		{
+			//编辑
+			$param = array(
+				'cname'			=> $cname,
+				'url'			=> $url,
+				'description'	=> $description,
+				'ctype'			=> $ctype
+			);
+			
+			$res = $obj_category->edit_category($param, $cid);
+
+			if($res)
+			{
+				//成功
+				$return = array(
+					'statusCode'	=> 200,
+					'message'		=> '编辑成功',
+					'navTabId'		=> '1',
+					'rel'			=> '',
+					'callbackType'	=> 'closeCurrent',
+					'forwardUrl'	=> '',
+					'confirmMsg'	=> ''
+				);
+			}
+			else
+			{
+				//失败
+				$return = array(
+					'statusCode'	=> 0,
+					'message'		=> '编辑失败',
+					'navTabId'		=> '',
+					'rel'			=> '',
+					'callbackType'	=> '',
+					'forwardUrl'	=> 'http://yuyao.com/category.php',
+					'confirmMsg'	=> ''
+				);
+			}
+		}
+		else
+		{
+			//添加
+			$deepth = $deepth + 1;
+			$param = array(
+				'cname'			=> $cname,
+				'url'			=> $url,
+				'description'	=> $description,
+				'ctype'			=> $ctype,
+				'parent_id'		=> $parent_id,
+				'deepth'		=> $deepth
+			);
+			
+			$res = $obj_category->add_new_category($param);
+			
+			if($res)
+			{
+				//成功
+				$return = array(
+					'statusCode'	=> 200,
+					'message'		=> '添加成功',
+					'navTabId'		=> '',
+					'rel'			=> '',
+					'callbackType'	=> '',
+					'forwardUrl'	=> 'http://yuyao.com/category.php',
+					'confirmMsg'	=> ''
+				);
+			}
+			else
+			{
+				//失败
+				$return = array(
+					'statusCode'	=> 0,
+					'message'		=> '添加失败',
+					'navTabId'		=> '',
+					'rel'			=> '',
+					'callbackType'	=> '',
+					'forwardUrl'	=> 'http://yuyao.com/category.php',
+					'confirmMsg'	=> ''
+				);
+			}
+		}
+		
+		exit(json_encode($return));
+	}
 
 }
 $app->run();
