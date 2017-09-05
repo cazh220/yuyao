@@ -177,6 +177,21 @@ function dialogAjaxDone(json){
 	}
 }
 
+
+/*在对话框中操作数据，并刷新对话框*/
+function dialogAjaxDoneFather(json) {
+    DWZ.ajaxDone(json);
+    if (json.statusCode == DWZ.statusCode.ok) {
+        if (json.navTabId) {
+            var dialog = $("body").data(json.navTabId);
+            $.pdialog.reload(dialog.data("url"), { data: {}, dialogId: json.navTabId, callback: null })
+        }
+        if ("closeCurrent" == json.callbackType) {
+            $.pdialog.closeCurrent();
+        }
+    }
+}
+
 /**
  * 处理navTab上的查询, 会重新载入当前navTab
  * @param {Object} form

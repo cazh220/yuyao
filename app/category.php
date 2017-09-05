@@ -61,6 +61,7 @@ class category extends Action {
 		
 		importModule("CategoryInfo","class");
 		$obj_category = new CategoryInfo;
+
 		if($type == 1)
 		{
 			//编辑
@@ -79,7 +80,7 @@ class category extends Action {
 				$return = array(
 					'statusCode'	=> 200,
 					'message'		=> '编辑成功',
-					'navTabId'		=> '1',
+					'navTabId'		=> 'pagination1',
 					'rel'			=> '',
 					'callbackType'	=> '',
 					'forwardUrl'	=> '',
@@ -92,10 +93,10 @@ class category extends Action {
 				$return = array(
 					'statusCode'	=> 0,
 					'message'		=> '编辑失败',
-					'navTabId'		=> '',
+					'navTabId'		=> 'pagination1',
 					'rel'			=> '',
 					'callbackType'	=> '',
-					'forwardUrl'	=> 'http://yuyao.com/category.php',
+					'forwardUrl'	=> 'closeCurrent',
 					'confirmMsg'	=> ''
 				);
 			}
@@ -121,10 +122,10 @@ class category extends Action {
 				$return = array(
 					'statusCode'	=> 200,
 					'message'		=> '添加成功',
-					'navTabId'		=> '',
+					'navTabId'		=> 'pagination1',
 					'rel'			=> '',
-					'callbackType'	=> '',
-					'forwardUrl'	=> 'http://yuyao.com/category.php',
+					'callbackType'	=> 'closeCurrent',
+					'forwardUrl'	=> '',
 					'confirmMsg'	=> ''
 				);
 			}
@@ -134,15 +135,14 @@ class category extends Action {
 				$return = array(
 					'statusCode'	=> 0,
 					'message'		=> '添加失败',
-					'navTabId'		=> '',
+					'navTabId'		=> 'pagination1',
 					'rel'			=> '',
 					'callbackType'	=> '',
-					'forwardUrl'	=> 'http://yuyao.com/category.php',
+					'forwardUrl'	=> 'closeCurrent',
 					'confirmMsg'	=> ''
 				);
 			}
 		}
-		
 		exit(json_encode($return));
 	}
 
