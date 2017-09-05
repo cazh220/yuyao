@@ -106,6 +106,25 @@ class CategoryInfo
     		return false;
     	}
     }
+    
+    //删除
+   public function delete_category($param)
+   {
+		if($this->db == null || empty($param))
+		{
+    		return false;
+    	}
+    	
+    	$sql = "UPDATE yy_category SET is_delete = 1 WHERE cid = ".$param['cid'];
+    
+    	try{
+    		$res = $this->db->exec($sql);
+    		return true;
+    	}catch(exception $e){
+    		$this->_log(array( __CLASS__ . '.class.php line ' . __LINE__ , 'function '. __FUNCTION__ . ' err:'.$e->getMessage().'  sql execute false. sql = ' . $sql, date("Y-m-d H:i:s")));
+    		return false;
+    	}
+   }
 	
 
 	/**

@@ -79,8 +79,8 @@ $(function(){
 		
 			<div id="navMenu">
 				<ul>
-					<li class="selected"><a href="sidebar_1.html"><span>产品分类</span></a></li>
-					<li><a href="sidebar_2.html"><span>产品信息</span></a></li>
+					<li class="selected"><a href="category.php?do=category"><span>产品分类</span></a></li>
+					<li><a href="goods.php"><span>产品信息</span></a></li>
 					<li><a href="sidebar_1.html"><span>订单管理</span></a></li>
 				</ul>
 			</div>
@@ -104,7 +104,7 @@ $(function(){
 						<ul class="tree treeFolder">
 							{if $category}
 								{foreach from=$category item=item key=key}
-								<li><a href="{$item.url}" target="navTab" rel="pagination1">{$item.cname}</a>
+								<li><a href="category.php?do=addcategory&last_cat_id=0&current_cat_id={$item.cid}" target="dialog" rel="pagination1" minable="false">{$item.cname}</a>
 									{if $item.child}
 									<ul>
 										{foreach from=$item.child item=itema key=keya}
@@ -158,7 +158,7 @@ $(function(){
 					<div class="page unitBox">
 						
 						<div class="pageFormContent" layoutH="80">
-							AAAAAAAAAAAAAAAA
+							<h2>欢迎使用进货系统，分类操作，点击相应分类，做相应操作！</h2>
 						</div>
 					</div>
 					

@@ -26,6 +26,15 @@ class category extends Action {
 		$page->output();
 	}
 	
+	//分类
+	public function doCategory(){	
+		//获取分类列表
+		$page = $this->app->page();
+		$page->value('category',$category_show);
+		$page->params['template'] = 'sidebar_2.html';
+		$page->output();
+	}
+	
 	//添加节点
 	public function doAddCategory()
 	{
@@ -64,46 +73,7 @@ class category extends Action {
 
 		if($type == 1)
 		{
-			//编辑
-			$param = array(
-				'cname'			=> $cname,
-				'url'			=> $url,
-				'description'	=> $description,
-				'ctype'			=> $ctype
-			);
-			
-			$res = $obj_category->edit_category($param, $cid);
-
-			if($res)
-			{
-				//成功
-				$return = array(
-					'statusCode'	=> 200,
-					'message'		=> '编辑成功',
-					'navTabId'		=> 'pagination1',
-					'rel'			=> '',
-					'callbackType'	=> '',
-					'forwardUrl'	=> '',
-					'confirmMsg'	=> ''
-				);
-			}
-			else
-			{
-				//失败
-				$return = array(
-					'statusCode'	=> 0,
-					'message'		=> '编辑失败',
-					'navTabId'		=> 'pagination1',
-					'rel'			=> '',
-					'callbackType'	=> '',
-					'forwardUrl'	=> 'closeCurrent',
-					'confirmMsg'	=> ''
-				);
-			}
-		}
-		else
-		{
-			//添加
+			//添加同类
 			$deepth = $deepth + 1;
 			$param = array(
 				'cname'			=> $cname,
@@ -135,6 +105,123 @@ class category extends Action {
 				$return = array(
 					'statusCode'	=> 0,
 					'message'		=> '添加失败',
+					'navTabId'		=> 'pagination1',
+					'rel'			=> '',
+					'callbackType'	=> '',
+					'forwardUrl'	=> 'closeCurrent',
+					'confirmMsg'	=> ''
+				);
+			}
+		}
+		elseif($type == 2)
+		{
+			//添加子类
+			$deepth = $deepth + 2;
+			$param = array(
+				'cname'			=> $cname,
+				'url'			=> $url,
+				'description'	=> $description,
+				'ctype'			=> $ctype,
+				'parent_id'		=> $cid,
+				'deepth'		=> $deepth
+			);
+			
+			$res = $obj_category->add_new_category($param);
+			
+			if($res)
+			{
+				//成功
+				$return = array(
+					'statusCode'	=> 200,
+					'message'		=> '添加成功',
+					'navTabId'		=> 'pagination1',
+					'rel'			=> '',
+					'callbackType'	=> 'closeCurrent',
+					'forwardUrl'	=> '',
+					'confirmMsg'	=> ''
+				);
+			}
+			else
+			{
+				//失败
+				$return = array(
+					'statusCode'	=> 0,
+					'message'		=> '添加失败',
+					'navTabId'		=> 'pagination1',
+					'rel'			=> '',
+					'callbackType'	=> '',
+					'forwardUrl'	=> 'closeCurrent',
+					'confirmMsg'	=> ''
+				);
+			}
+		}
+		elseif($type == 3)
+		{
+			//编辑
+			$param = array(
+				'cname'			=> $cname,
+				'url'			=> $url,
+				'description'	=> $description,
+				'ctype'			=> $ctype
+			);
+			
+			$res = $obj_category->edit_category($param, $cid);
+
+			if($res)
+			{
+				//成功
+				$return = array(
+					'statusCode'	=> 200,
+					'message'		=> '编辑成功',
+					'navTabId'		=> 'pagination1',
+					'rel'			=> '',
+					'callbackType'	=> 'closeCurrent',
+					'forwardUrl'	=> '',
+					'confirmMsg'	=> ''
+				);
+			}
+			else
+			{
+				//失败
+				$return = array(
+					'statusCode'	=> 0,
+					'message'		=> '编辑失败',
+					'navTabId'		=> 'pagination1',
+					'rel'			=> '',
+					'callbackType'	=> '',
+					'forwardUrl'	=> 'closeCurrent',
+					'confirmMsg'	=> ''
+				);
+			}
+		}
+		else
+		{
+			//删除
+			$param = array(
+				'cid'	=> $cid
+			);
+			
+			$res = $obj_category->delete_category($param);
+			
+			if($res)
+			{
+				//成功
+				$return = array(
+					'statusCode'	=> 200,
+					'message'		=> '删除成功',
+					'navTabId'		=> 'pagination1',
+					'rel'			=> '',
+					'callbackType'	=> 'closeCurrent',
+					'forwardUrl'	=> '',
+					'confirmMsg'	=> ''
+				);
+			}
+			else
+			{
+				//失败
+				$return = array(
+					'statusCode'	=> 0,
+					'message'		=> '删除失败',
 					'navTabId'		=> 'pagination1',
 					'rel'			=> '',
 					'callbackType'	=> '',

@@ -1,10 +1,6 @@
 
 <div class="pageContent">
-<<<<<<< HEAD
-	<form method="post" action="category.php?do=categoryact" class="pageForm required-validate" onsubmit="return validateCallback(this, navTabAjaxDone));">
-=======
 	<form method="post" action="category.php?do=categoryact" class="pageForm required-validate" onsubmit="return validateCallback(this, dialogAjaxDone);">
->>>>>>> 0af4850c4ef6545b5f2a1ac46e9f62a32eab4881
 		<div class="pageFormContent" layoutH="56">
 			<p>
 				<label>上级分类</label>
@@ -34,13 +30,13 @@
 					<option value="1" {if $current_category.ctype==1}selected{/if}>公司</option>
 				</select>
 			</p>
-			<p style="width: 300px;">
+			<p style="width: 500px;">
 				<label>操作类别：</label>
-				<label style="width: 200px;">
-					<input type="radio" id="o1" class="operate_type" name="type" value="0" onclick="add()"/>添加同类 
-					<input type="radio" id="o1" class="operate_type" name="type" value="0" onclick="add()"/>添加子类
-					<input type="radio" class="operate_type" name="type" value="1" checked onclick="edit()"/>编辑
-					<input type="radio" class="operate_type" name="type" value="2" checked onclick="delete_category()"/>删除
+				<label style="width: 300px;">
+					<input type="radio" id="o1" class="operate_type" name="type" value="1" onclick="add_same()"/>添加同类 
+					<input type="radio" id="o2" class="operate_type" name="type" value="2" onclick="add_child()"/>添加子类
+					<input type="radio" id="o3" class="operate_type" name="type" value="3" checked onclick="edit_cat()"/>编辑
+					<input type="radio" id="o4" class="operate_type" name="type" value="4" onclick="delete_cat()"/>删除
 				</label>
 				<label></label>
 			</p>
