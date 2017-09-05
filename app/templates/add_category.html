@@ -1,6 +1,6 @@
 
 <div class="pageContent">
-	<form method="post" action="category.php?do=categoryact" class="pageForm required-validate" onsubmit="return validateCallback(this, navTabAjaxDone);">
+	<form method="post" action="category.php?do=categoryact" class="pageForm required-validate" onsubmit="return validateCallback(this, dialogAjaxDone);">
 		<div class="pageFormContent" layoutH="56">
 			<p>
 				<label>上级分类</label>
@@ -30,9 +30,14 @@
 					<option value="1" {if $current_category.ctype==1}selected{/if}>公司</option>
 				</select>
 			</p>
-			<p>
+			<p style="width: 300px;">
 				<label>操作类别：</label>
-				<label><input type="radio" id="o1" class="operate_type" name="type" value="0" onclick="add()"/>添加 <input type="radio" class="operate_type" name="type" value="1" checked onclick="edit()"/>编辑</label>
+				<label style="width: 200px;">
+					<input type="radio" id="o1" class="operate_type" name="type" value="0" onclick="add()"/>添加同类 
+					<input type="radio" id="o1" class="operate_type" name="type" value="0" onclick="add()"/>添加子类
+					<input type="radio" class="operate_type" name="type" value="1" checked onclick="edit()"/>编辑
+					<input type="radio" class="operate_type" name="type" value="2" checked onclick="delete_category()"/>删除
+				</label>
 				<label></label>
 			</p>
 			
