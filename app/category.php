@@ -81,7 +81,7 @@ class category extends Action {
 					'message'		=> '编辑成功',
 					'navTabId'		=> '1',
 					'rel'			=> '',
-					'callbackType'	=> 'closeCurrent',
+					'callbackType'	=> '',
 					'forwardUrl'	=> '',
 					'confirmMsg'	=> ''
 				);
