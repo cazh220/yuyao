@@ -29,10 +29,25 @@ class category extends Action {
 	//分类
 	public function doCategory(){	
 		//获取分类列表
+		importModule("CategoryInfo","class");
+		$obj_category = new CategoryInfo;
+		
+		$category_list = $obj_category->get_categoty_list();
+		
+		//导入工具类
+		import('util.CategoryShow');
+		$category_show = CategoryShow::category_show($category_list);
+		
 		$page = $this->app->page();
 		$page->value('category',$category_show);
-		$page->params['template'] = 'sidebar_2.html';
+		$page->params['template'] = 'category_menu.html';
 		$page->output();
+	}
+	
+	//分类细目展示
+	public function doShowCategory()
+	{
+		
 	}
 	
 	//添加节点
