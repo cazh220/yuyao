@@ -24,30 +24,30 @@
 	<table class="table" width="100%" layoutH="138">
 		<thead>
 			<tr>
-				<th width="80" align="center">客户编号</th>
+				<th width="100" align="center">客户编号</th>
 				<th width="200" align="center">客户名称</th>
 				<th width="150" align="center">商品名称</th>
 				<th width="100" align="center">报价</th>
-				<th width="240" align="center">有效起始时间</th>
-				<th width="240" align="center">有效结束时间</th>
-				<th width="80" align="center">操作</th>
+				<!--<th width="250" align="center">有效起始时间</th>
+				<th width="250" align="center">有效结束时间</th>-->
+				<!--<th width="80" align="center">操作</th>-->
 			</tr>
 		</thead>
 		<tbody>
 			{if $offer}
 			{foreach from=$offer item=item key=key}
-			<tr target="sid_user" rel="1" {if $item.type=='base'}style="background-color:#E3FDA7;"{/if} ondblclick="update_offer(this, {$item.goods_id}, {$item.role_id}, {$item.price}, '{$item.start_time}', '{$item.end_time}')">
+			<tr target="sid_user" rel="1" {if $item.type=='base'}style="background-color:#E3FDA7;"{/if} ondblclick="update_offer(this, {$item.goods_id}, {$item.role_id}, {$item.price})" id="o_{$item.role_id}">
 				<td>{$item.role_id}</td>
 				<td>{$item.role_name}</td>
 				<td>{$item.goods_name}</td>
-				<td><span style="vertical-align: middle;" id="p{$key}" class="offer_price" ondblclick="update_price({$item.goods_id}, {$item.role_id}, {$item.price}, this)">{$item.price}</span></td>
-				<td>{$item.start_time}</td>
-				<td>{$item.end_time}</td>
-				<td>
+				<td>{$item.price}</td>
+				<!--<td>{$item.start_time}</td>
+				<td>{$item.end_time}</td>-->
+				<!--<td>
 					{if $item.type neq 'base'}
 					<a title="修改报价" target="navTab" href="goods.php?do=updateofferprice&goods_id={$item.goods_id}" class="btnInfo" rel="dlg_page10" mask="true">修改报价</a>
 					{/if}
-				</td>
+				</td>-->
 				
 			</tr>
 			{/foreach}
@@ -64,12 +64,12 @@ $(function(){
 
 
 
-function update_offer(o, goods_id, role_id, price, start_time, end_time)
+function update_offer(o, goods_id, role_id, price)
 {
 	//var txt = '<input type="text" name="startDate" class="date" size="30" /><a class="inputDateButton" href="javascript:;">选择</a>';
-	$(o).children().eq(3).html('<input type="text"  onblur="update_role_price('+role_id+','+goods_id+')" value="'+price+'"/>');
-	$(o).children().eq(4).html('<input type="text"  onblur="update_role_price('+role_id+','+goods_id+')" value="'+start_time+'"/>');
-	$(o).children().eq(5).html('<input type="text"  onblur="update_role_price('+role_id+','+goods_id+')" value="'+end_time+'"/>');
+	$(o).children().eq(3).html('<input type="text" id="price_'+role_id+'"  onblur="update_role_price('+role_id+','+goods_id+')" value="'+price+'"/>');
+	//$(o).children().eq(4).html('<input type="text" id="start_time_'+role_id+'" placeholder="请输入开始日期，如：2017-09-01"  onblur="update_role_price('+role_id+','+goods_id+')" value="'+start_time+'"/>');
+	//$(o).children().eq(5).html('<input type="text" id="end_time_'+role_id+'" placeholder="请输入结束日期，如：2017-09-01"  onblur="update_role_price('+role_id+','+goods_id+')" value="'+end_time+'"/>');
 	//var data = $(o).children().eq(0).text();  
 	//console.log(data);
 }
@@ -84,17 +84,28 @@ function update_price(goods_id, role_id, price, o)
 
 function update_role_price(role_id, goods_id)
 {
-	var value = $("#new_price_"+role_id).val();
+	var price = $("#price_"+role_id).val();
+
 	$.ajax({
 		type:"post",
 		url:"goods.php?do=updateroleprice",
-		data:"goods_id="+goods_id+"&role_id="+role_id+"&price="+value,
+		data:"goods_id="+goods_id+"&role_id="+role_id+"&price="+price,
 		dataType:"json",
 		success:function(msg)
 		{
-			
+			if(msg.status==1)
+			{
+				$("#o_"+role_id).children().eq(3).html(price);
+				//$("#price_"+role_id).html(price);
+			}
+			else
+			{
+				alert(msg.message);
+				return false;
+			}
 		}
 	});
+	
 }
 
 {/literal}

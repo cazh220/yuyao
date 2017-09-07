@@ -160,7 +160,8 @@ class GoodsInfo
     		return false;
     	}
     	
-    	$sql = "SELECT * FROM yy_offer WHERE is_delete = 0 AND start_time <= NOW() AND end_time >= NOW() AND goods_id = {$goods_id} ORDER BY offer_id DESC LIMIT 1";
+    	//$sql = "SELECT * FROM yy_offer WHERE is_delete = 0 AND start_time <= NOW() AND end_time >= NOW() AND goods_id = {$goods_id} ORDER BY offer_id DESC LIMIT 1";
+    	$sql = "SELECT * FROM yy_offer WHERE is_delete = 0 AND goods_id = {$goods_id} ORDER BY offer_id DESC LIMIT 1";
     	try{
     		$res = $this->db->getArray($sql);
     	}
@@ -173,14 +174,22 @@ class GoodsInfo
     }
     
     //更新报价
-    public function update_role_price($price=0, $where)
+    public function update_role_price($param)
     {
-    	if($this->db == null || empty($where))
+    	if($this->db == null || empty($param))
 		{
     		return false;
     	}
     	
-    	$sql = "UPDATE yy_offer SET is_delete = 0 WHERE goods_id = ".$where['goods_id']." AND role_id = ".$where['role_id'];
+    	$sql = "UPDATE yy_offer SET is_delete = 1 WHERE goods_id = ".$param['goods_id']." AND role_id = ".$param['role_id'];
+    	try{
+    		$res = $this->db->exec($sql);
+    	}catch(exception $e){
+    		$this->_log(array( __CLASS__ . '.class.php line ' . __LINE__ , 'function '. __FUNCTION__ . ' err:'.$e->getMessage().'  sql execute false. sql = ' . $sql, date("Y-m-d H:i:s")));
+    		return false;
+    	}
+    	
+    	$sql = "INSERT INTO yy_offer(goods_id, role_id, price, create_time, update_time, operator_id, operator)VALUES(".$param['goods_id'].",".$param['role_id'].", ".$param['price'].", NOW(), NOW(), ".$param['operator_id'].",'".$param['operator']."')";//echo $sql;die;
     	try{
     		$res = $this->db->exec($sql);
     		return true;
@@ -188,10 +197,80 @@ class GoodsInfo
     		$this->_log(array( __CLASS__ . '.class.php line ' . __LINE__ , 'function '. __FUNCTION__ . ' err:'.$e->getMessage().'  sql execute false. sql = ' . $sql, date("Y-m-d H:i:s")));
     		return false;
     	}
+    }
+    
+    //获取报价商品
+    public function get_offer_list($param)
+    {
+    	if($this->db == null)
+		{
+    		return false;
+    	}
     	
+    	$where = ' a.is_delete = 0 AND a.is_show = 0';
+    	if($param['category_id'])
+    	{
+    		$where .= " AND a.category_id = ".$param['category_id'];
+    	}
+    	
+    	$sql = "SELECT * FROM yy_goods a LEFT JOIN yy_category b ON a.category_id = b.cid WHERE {$where} ORDER BY goods_id DESC";
+    	
+    	$sql_count = "SELECT count(*) as count FROM yy_goods a LEFT JOIN yy_category b ON a.category_id = b.cid WHERE {$where}";
+    	$res_count = $this->db->getValue($sql_count);
+    	
+    	if($param['page'] && $param['page_size'])
+    	{
+    		$start = ($param['page']-1)*$param['page_size'];
+    		$page_size = $param['page_size'];
+    		$sql .= " LIMIT {$start}, {$page_size}";
+    	}
+    	//echo $sql;die;
+    	$res = $this->db->getArray($sql);
+    	
+    	$data = array();
+    	
+    	$data['list'] = !empty($res) ? $res : array();
+    	$data['count'] = !empty($res_count)  ? $res_count : 0;
+    	
+    	return $data;
     }
    
+   	//删除商品
+   	public function delete_goods($goods_ids='')
+   	{
+   		if($this->db == null || empty($goods_ids))
+		{
+    		return false;
+    	}
+    	
+    	$sql = "UPDATE yy_goods SET is_delete = 1 WHERE goods_id IN (".$goods_ids.")";
+    	
+    	try{
+    		$res = $this->db->exec($sql);
+    		return true;
+    	}catch(exception $e){
+    		$this->_log(array( __CLASS__ . '.class.php line ' . __LINE__ , 'function '. __FUNCTION__ . ' err:'.$e->getMessage().'  sql execute false. sql = ' . $sql, date("Y-m-d H:i:s")));
+    		return false;
+    	}
+   	}
    	
+   	//获取用户特定的报价
+   	public function get_role_good_price($role_id=0, $goods_id=0)
+   	{
+   		if($this->db == null || empty($role_id) || empty($goods_id))
+		{
+    		return false;
+    	}
+    	$sql = "SELECT price FROM yy_offer WHERE role_id = ".$role_id." AND goods_id = ".$goods_id." ORDER BY offer_id DESC";
+    	
+    	try{
+    		$res = $this->db->getValue($sql);
+    	}catch(exception $e){
+    		$this->_log(array( __CLASS__ . '.class.php line ' . __LINE__ , 'function '. __FUNCTION__ . ' err:'.$e->getMessage().'  sql execute false. sql = ' . $sql, date("Y-m-d H:i:s")));
+    	}
+    	return $res ? $res : 0;
+
+   	}
 	
 
 	/**

@@ -311,10 +311,67 @@ class goods extends Action {
 	{
 		$goods_id = !empty($_POST['goods_id']) ? intval($_POST['goods_id']) : 0;
 		$role_id = !empty($_POST['role_id']) ? intval($_POST['role_id']) : 0;
-		$price = !empty($_POST['price']) ? floatval($_POST['price']) : 0;
+		$price = !empty($_POST['price']) ? ($_POST['price']) : 0;
 		
 		importModule("GoodsInfo","class");
 		$obj_good = new GoodsInfo;
+		
+		
+		$param = array(
+			'goods_id'		=> $goods_id,
+			'role_id'		=> $role_id,
+			'price'			=> $price,
+			'operator_id'	=> 1,
+			'operator'		=> '曹政'
+		);
+
+		$res = $obj_good->update_role_price($param);
+		
+		if($res)
+		{
+			$return = array('status'=>1, 'msg'=>'更新成功');
+		}
+		else
+		{
+			$return = array('status'=>0, 'msg'=>'更新失败');
+		}
+		
+		exit(json_encode($return));
+	}
+	
+	//删除商品
+	public function doDeleteGoods()
+	{
+		$goods_ids = $_REQUEST['ids'] ? trim($_REQUEST['ids']) : '';
+		$return = array(
+			'statusCode'	=> 0,
+			'message'		=> '删除失败',
+			'navTabId'		=> 'pagination1',
+			'rel'			=> '',
+			'callbackType'	=> '',
+			'forwardUrl'	=> 'closeCurrent',
+			'confirmMsg'	=> ''
+		);
+		if($goods_ids)
+		{
+			importModule("GoodsInfo","class");
+			$obj_good = new GoodsInfo;
+			$res = $obj_good->delete_goods($goods_ids);
+			if($res)
+			{
+				$return = array(
+					'statusCode'	=> 200,
+					'message'		=> '删除成功',
+					'navTabId'		=> 'pagination1',
+					'rel'			=> '',
+					'callbackType'	=> '',
+					'forwardUrl'	=> 'closeCurrent',
+					'confirmMsg'	=> ''
+				);
+			}
+		}
+		
+		exit(json_encode($return));	
 		
 		
 	}
