@@ -1,14 +1,14 @@
 
 <div class="pageContent">
-	<form method="post" action="goods.php?do=addgoodact" class="pageForm required-validate" onsubmit="return validateCallback(this, navTabAjaxDone);">
+	<form method="post" action="goods.php?do=editgoodact" class="pageForm required-validate" onsubmit="return validateCallback(this, navTabAjaxDone);">
 		<div class="pageFormContent" layoutH="56">
 			<p>
 				<label>商品名称：</label>
-				<input name="goods_name" class="required" type="text" size="30" value="" alt="请输入商品名称"/>
+				<input name="goods_name" class="required" type="text" size="30" value="{$good.goods_name}" alt="请输入商品名称"/>
 			</p>
 			<p>
 				<label>商品编码：</label>
-				<input name="goods_code" class="required" type="text" size="30" value="" alt="请输入商品编码"/>
+				<input name="goods_code" class="required" type="text" size="30" value="{$good.goods_code}" alt="请输入商品编码"/>
 			</p>
 			<p>
 				<label>商品分类：</label>
@@ -16,16 +16,16 @@
 					<ul class="tree treeFolder treeFolder">
 						{if $category}
 							{foreach from=$category item=item key=key}
-							<li><option value="{$item.cid}">{$item.cname}</option>
+							<li><option value="{$item.cid}" {if $good.category_id == $item.cid}selected="selected"{/if}>{$item.cname}</option>
 								{if $item.child}
 								<ul>
 									{foreach from=$item.child item=itema key=keya}
 									<li>
-										<option value="{$itema.cid}">&nbsp;&nbsp;∟{$itema.cname}</option>
+										<option value="{$itema.cid}" {if $good.category_id == $item.cid}selected="selected"{/if}>&nbsp;&nbsp;∟{$itema.cname}</option>
 										{if $itema.child}
 										<ul>
 											{foreach from=$itema.child item=itemb key=keyb}
-											<li><option value="{$itemb.cid}">&nbsp;&nbsp;&nbsp;&nbsp;∟{$itemb.cname}</option></li>
+											<li><option value="{$itemb.cid}" {if $good.category_id == $item.cid}selected="selected"{/if}>&nbsp;&nbsp;&nbsp;&nbsp;∟{$itemb.cname}</option></li>
 											{/foreach}
 										</ul>
 										{/if}
@@ -41,32 +41,32 @@
 			</p>
 			<p>
 				<label>商品规格：</label>
-				<input name="unit" class="required" type="text" size="30" value="" alt="请输入商品单位"/>
+				<input name="unit" class="required" type="text" size="30" value="{$good.unit}" alt="请输入商品单位"/>
 			</p>
 			<p>
 				<label>商品价格：</label>
-				<input name="price" class="required" type="text" size="30" value="" alt="请输入商品价格"/>
+				<input name="price" class="required" type="text" size="30" value="{$good.price}" alt="请输入商品价格"/>
 			</p>
 			<p>
 				<label>商品税率：</label>
-				<input name="tax" class="required" type="text" size="28" value="" alt="请输入税率"/>%
+				<input name="tax" class="required" type="text" size="28" value="{$good.price}" alt="请输入税率"/>%
 			</p>
 			<p>
 				<label>商品库存：</label>
-				<input name="stock" class="digits" type="text" size="30" alt="请输入库存数量"/>
+				<input name="stock" class="digits" type="text" size="30" value="{$good.stock}" alt="请输入库存数量"/>
 			</p>
 			<p>
 				<label>商品状态：</label>
 				<select name="is_show" class="required combox">
-					<option value="0" selected>正常</option>
-					<option value="1">下架</option>
+					<option value="0" {if $good.is_show == 0}selected="selected"{/if}>正常</option>
+					<option value="1" {if $good.is_show == 1}selected="selected"{/if}>下架</option>
 				</select>
 			</p>
 			<p>
 				<label>商品描述：</label>
-				<textarea name="description" cols="31" rows="3"></textarea>
+				<textarea name="description" cols="31" rows="3">{$good.description}</textarea>
 			</p>
-
+			<input type="hidden" id="goods_id" name="goods_id" value="{$good.goods_id}" />
 		
 		</div>
 		<div class="formBar">

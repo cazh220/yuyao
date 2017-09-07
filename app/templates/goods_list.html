@@ -93,7 +93,8 @@
 				<td>{$item.operator}</td>
 				<td>
 					<a title="删除" target="ajaxTodo" href="demo/common/ajaxDone.html?id=xxx" class="btnDel">删除</a>
-					<a title="编辑" target="navTab" href="goods.php?do=editgood&goods_id={$item.goods_id}" class="btnEdit">编辑</a>
+					<a title="修改" target="navTab" href="goods.php?do=editgood&goods_id={$item.goods_id}"  class="btnEdit">修改</a>
+					<a title="修改报价" target="dialog" href="goods.php?do=offerprice&goods_id={$item.goods_id}" class="btnInfo" rel="dlg_page10" mask="true">修改报价</a>
 				</td>
 			</tr>
 			{/foreach}

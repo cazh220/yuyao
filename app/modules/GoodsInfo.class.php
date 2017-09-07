@@ -51,8 +51,36 @@ class GoodsInfo
     		$page_size = $param['page_size'];
     		$sql .= " LIMIT {$start}, {$page_size}";
     	}
-    	
+    	//echo $sql;die;
     	$res = $this->db->getArray($sql);
+    	return $res;
+    }
+    
+    //获取商品详情
+    public function get_good_detail($goods_id=0)
+    {
+    	if($this->db == null || empty($goods_id))
+		{
+    		return false;
+    	}
+    	
+    	$sql = "SELECT * FROM yy_goods WHERE goods_id = {$goods_id}";
+    	
+    	$res = $this->db->getRow($sql);
+    	return $res;
+    }
+    
+    //获取价格
+    public function get_good_price($goods_id=0)
+    {
+    	if($this->db == null || empty($goods_id))
+		{
+    		return false;
+    	}
+    	
+    	$sql = "SELECT price FROM yy_goods WHERE goods_id = {$goods_id}";
+    	
+    	$res = $this->db->getValue($sql);
     	return $res;
     }
     
@@ -123,6 +151,47 @@ class GoodsInfo
     		return false;
     	}
    }
+   
+    //查询报价
+    public function get_offer_info($goods_id=0)
+    {
+    	if($this->db == null || empty($goods_id))
+		{
+    		return false;
+    	}
+    	
+    	$sql = "SELECT * FROM yy_offer WHERE is_delete = 0 AND start_time <= NOW() AND end_time >= NOW() AND goods_id = {$goods_id} ORDER BY offer_id DESC LIMIT 1";
+    	try{
+    		$res = $this->db->getArray($sql);
+    	}
+    	catch(exception $e)
+    	{
+    		echo $e->getMessage();
+    	}
+    	
+    	return !empty($res[0]) ? $res[0] : array();
+    }
+    
+    //更新报价
+    public function update_role_price($price=0, $where)
+    {
+    	if($this->db == null || empty($where))
+		{
+    		return false;
+    	}
+    	
+    	$sql = "UPDATE yy_offer SET is_delete = 0 WHERE goods_id = ".$where['goods_id']." AND role_id = ".$where['role_id'];
+    	try{
+    		$res = $this->db->exec($sql);
+    		return true;
+    	}catch(exception $e){
+    		$this->_log(array( __CLASS__ . '.class.php line ' . __LINE__ , 'function '. __FUNCTION__ . ' err:'.$e->getMessage().'  sql execute false. sql = ' . $sql, date("Y-m-d H:i:s")));
+    		return false;
+    	}
+    	
+    }
+   
+   	
 	
 
 	/**
