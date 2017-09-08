@@ -85,6 +85,20 @@ class OrderInfo
 		return true;
 
     }
+    
+    //获取待确认的订单商品
+    public function get_unconfirm_order_goods($param=array())
+    {
+    	if($this->db == null || empty($param['user_id']))
+		{
+    		return false;
+    	}
+    	
+    	$sql = "SELECT * FROM yy_order a LEFT JOIN yy_order_goods b ON a.order_id = b.order_id LEFT JOIN yy_goods c ON b.goods_id = c.goods_id WHERE a.is_delete = 0 AND a.order_status = 0 AND a.operator_id = ".$param['user_id'];
+    	
+    	$res = $this->db->getArray($sql);
+    	return $res ? $res : array();  	
+    }
 
 	/**
 	 * 数据更新失败记录日志，并标识操作失败

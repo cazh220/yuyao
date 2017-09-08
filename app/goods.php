@@ -256,7 +256,7 @@ class goods extends Action {
 				if($val['role_id'] != 1)//1管理员
 				{
 					//查询报价
-					$offer = $obj_good->get_offer_info($goods_id);
+					$offer = $obj_good->get_role_price_detail($val['role_id'], $goods_id);
 
 					if(!empty($offer))
 					{
