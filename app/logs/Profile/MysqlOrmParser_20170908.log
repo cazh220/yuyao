@@ -9,3 +9,12 @@ SELECT price FROM yy_offer WHERE role_id = 4 AND goods_id = 1 ORDER BY offer_id 
 SELECT price FROM yy_goods WHERE goods_id = 1 LIMIT 1
 
 
+/offer.php?do=offerlist&category_id=4&_=1504880623516
+SELECT count(*) as count FROM yy_goods a LEFT JOIN yy_category b ON a.category_id = b.cid WHERE  a.is_delete = 0 AND a.is_show = 0 AND a.category_id = 4 LIMIT 1
+SELECT * FROM yy_goods a LEFT JOIN yy_category b ON a.category_id = b.cid WHERE  a.is_delete = 0 AND a.is_show = 0 AND a.category_id = 4 ORDER BY goods_id DESC LIMIT 0, 10
+SELECT * FROM yy_category WHERE is_delete = 0 ORDER BY sort ASC
+SELECT price FROM yy_offer WHERE role_id = 4 AND goods_id = 3 ORDER BY offer_id DESC LIMIT 1
+SELECT price FROM yy_offer WHERE role_id = 4 AND goods_id = 1 ORDER BY offer_id DESC LIMIT 1
+SELECT price FROM yy_goods WHERE goods_id = 1 LIMIT 1
+
+
