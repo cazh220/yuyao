@@ -22,6 +22,7 @@ class category extends Action {
 		//print_r($category_show);die;
 		$page = $this->app->page();
 		$page->value('category',$category_show);
+		$page->value('main','category_main');
 		$page->params['template'] = 'index_menu.html';
 		$page->output();
 	}

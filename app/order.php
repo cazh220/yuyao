@@ -22,6 +22,7 @@ class order extends Action {
 		
 		$page = $this->app->page();
 		$page->value('category',$category_show);
+		$page->value('main','myorder');
 		$page->params['template'] = 'order_menu.html';
 		$page->output();
 	}
@@ -98,7 +99,6 @@ class order extends Action {
 		exit(json_encode($return));
 		
 	}
-	
 	
 
 }

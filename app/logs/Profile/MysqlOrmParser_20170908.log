@@ -9,3 +9,189 @@ SELECT price FROM yy_offer WHERE role_id = 4 AND goods_id = 1 ORDER BY offer_id 
 SELECT price FROM yy_goods WHERE goods_id = 1 LIMIT 1
 
 
+/goods.php?do=offerprice&goods_id=5&_=1504838678282
+SELECT * FROM yy_role WHERE is_delete = 0
+SELECT * FROM yy_goods WHERE goods_id = 5 LIMIT 1
+SELECT * FROM yy_offer WHERE is_delete = 0 AND goods_id = 5 ORDER BY offer_id DESC LIMIT 1
+SELECT * FROM yy_offer WHERE is_delete = 0 AND goods_id = 5 ORDER BY offer_id DESC LIMIT 1
+SELECT * FROM yy_offer WHERE is_delete = 0 AND goods_id = 5 ORDER BY offer_id DESC LIMIT 1
+SELECT * FROM yy_offer WHERE is_delete = 0 AND goods_id = 5 ORDER BY offer_id DESC LIMIT 1
+
+
+/goods.php?do=offerprice&goods_id=4&_=1504838678283
+SELECT * FROM yy_role WHERE is_delete = 0
+SELECT * FROM yy_goods WHERE goods_id = 4 LIMIT 1
+SELECT * FROM yy_offer WHERE is_delete = 0 AND goods_id = 4 ORDER BY offer_id DESC LIMIT 1
+SELECT * FROM yy_offer WHERE is_delete = 0 AND goods_id = 4 ORDER BY offer_id DESC LIMIT 1
+SELECT * FROM yy_offer WHERE is_delete = 0 AND goods_id = 4 ORDER BY offer_id DESC LIMIT 1
+SELECT * FROM yy_offer WHERE is_delete = 0 AND goods_id = 4 ORDER BY offer_id DESC LIMIT 1
+
+
+/goods.php?do=offerprice&goods_id=5&_=1504838678284
+SELECT * FROM yy_role WHERE is_delete = 0
+SELECT * FROM yy_goods WHERE goods_id = 5 LIMIT 1
+SELECT * FROM yy_offer WHERE is_delete = 0 AND goods_id = 5 ORDER BY offer_id DESC LIMIT 1
+SELECT * FROM yy_offer WHERE is_delete = 0 AND goods_id = 5 ORDER BY offer_id DESC LIMIT 1
+SELECT * FROM yy_offer WHERE is_delete = 0 AND goods_id = 5 ORDER BY offer_id DESC LIMIT 1
+SELECT * FROM yy_offer WHERE is_delete = 0 AND goods_id = 5 ORDER BY offer_id DESC LIMIT 1
+
+
+/goods.php?do=offerprice&goods_id=5&_=1504838678286
+SELECT * FROM yy_role WHERE is_delete = 0
+SELECT * FROM yy_goods WHERE goods_id = 5 LIMIT 1
+SELECT * FROM yy_offer WHERE is_delete = 0 AND goods_id = 5 ORDER BY offer_id DESC LIMIT 1
+SELECT * FROM yy_offer WHERE is_delete = 0 AND goods_id = 5 ORDER BY offer_id DESC LIMIT 1
+SELECT * FROM yy_offer WHERE is_delete = 0 AND goods_id = 5 ORDER BY offer_id DESC LIMIT 1
+SELECT * FROM yy_offer WHERE is_delete = 0 AND goods_id = 5 ORDER BY offer_id DESC LIMIT 1
+
+
+/offer.php?do=offerlist&category_id=9&_=1504838678287
+SELECT count(*) as count FROM yy_goods a LEFT JOIN yy_category b ON a.category_id = b.cid WHERE  a.is_delete = 0 AND a.is_show = 0 AND a.category_id = 9 LIMIT 1
+SELECT * FROM yy_goods a LEFT JOIN yy_category b ON a.category_id = b.cid WHERE  a.is_delete = 0 AND a.is_show = 0 AND a.category_id = 9 ORDER BY goods_id DESC LIMIT 0, 10
+SELECT * FROM yy_category WHERE is_delete = 0 ORDER BY sort ASC
+SELECT price FROM yy_offer WHERE role_id = 4 AND goods_id = 5 ORDER BY offer_id DESC LIMIT 1
+SELECT price FROM yy_offer WHERE role_id = 4 AND goods_id = 4 ORDER BY offer_id DESC LIMIT 1
+SELECT price FROM yy_goods WHERE goods_id = 4 LIMIT 1
+SELECT price FROM yy_offer WHERE role_id = 4 AND goods_id = 2 ORDER BY offer_id DESC LIMIT 1
+SELECT price FROM yy_goods WHERE goods_id = 2 LIMIT 1
+
+
+/offer.php?do=offerlist&category_id=9&_=1504838678291
+SELECT count(*) as count FROM yy_goods a LEFT JOIN yy_category b ON a.category_id = b.cid WHERE  a.is_delete = 0 AND a.is_show = 0 AND a.category_id = 9 LIMIT 1
+SELECT * FROM yy_goods a LEFT JOIN yy_category b ON a.category_id = b.cid WHERE  a.is_delete = 0 AND a.is_show = 0 AND a.category_id = 9 ORDER BY goods_id DESC LIMIT 0, 10
+SELECT * FROM yy_category WHERE is_delete = 0 ORDER BY sort ASC
+SELECT price FROM yy_offer WHERE role_id = 4 AND goods_id = 5 ORDER BY offer_id DESC LIMIT 1
+SELECT price FROM yy_offer WHERE role_id = 4 AND goods_id = 4 ORDER BY offer_id DESC LIMIT 1
+SELECT price FROM yy_goods WHERE goods_id = 4 LIMIT 1
+SELECT price FROM yy_offer WHERE role_id = 4 AND goods_id = 2 ORDER BY offer_id DESC LIMIT 1
+SELECT price FROM yy_goods WHERE goods_id = 2 LIMIT 1
+
+
+/offer.php?do=offerlist&category_id=9&_=1504838678293
+SELECT count(*) as count FROM yy_goods a LEFT JOIN yy_category b ON a.category_id = b.cid WHERE  a.is_delete = 0 AND a.is_show = 0 AND a.category_id = 9 LIMIT 1
+SELECT * FROM yy_goods a LEFT JOIN yy_category b ON a.category_id = b.cid WHERE  a.is_delete = 0 AND a.is_show = 0 AND a.category_id = 9 ORDER BY goods_id DESC LIMIT 0, 10
+SELECT * FROM yy_category WHERE is_delete = 0 ORDER BY sort ASC
+SELECT price FROM yy_offer WHERE role_id = 4 AND goods_id = 5 ORDER BY offer_id DESC LIMIT 1
+SELECT price FROM yy_offer WHERE role_id = 4 AND goods_id = 4 ORDER BY offer_id DESC LIMIT 1
+SELECT price FROM yy_goods WHERE goods_id = 4 LIMIT 1
+SELECT price FROM yy_offer WHERE role_id = 4 AND goods_id = 2 ORDER BY offer_id DESC LIMIT 1
+SELECT price FROM yy_goods WHERE goods_id = 2 LIMIT 1
+
+
+/goods.php?do=offerprice&goods_id=5&_=1504838678297
+SELECT * FROM yy_role WHERE is_delete = 0
+SELECT * FROM yy_goods WHERE goods_id = 5 LIMIT 1
+SELECT * FROM yy_offer WHERE is_delete = 0 AND goods_id = 5 ORDER BY offer_id DESC LIMIT 1
+SELECT * FROM yy_offer WHERE is_delete = 0 AND goods_id = 5 ORDER BY offer_id DESC LIMIT 1
+SELECT * FROM yy_offer WHERE is_delete = 0 AND goods_id = 5 ORDER BY offer_id DESC LIMIT 1
+SELECT * FROM yy_offer WHERE is_delete = 0 AND goods_id = 5 ORDER BY offer_id DESC LIMIT 1
+
+
+/offer.php?do=offerlist&category_id=9&_=1504838678298
+SELECT count(*) as count FROM yy_goods a LEFT JOIN yy_category b ON a.category_id = b.cid WHERE  a.is_delete = 0 AND a.is_show = 0 AND a.category_id = 9 LIMIT 1
+SELECT * FROM yy_goods a LEFT JOIN yy_category b ON a.category_id = b.cid WHERE  a.is_delete = 0 AND a.is_show = 0 AND a.category_id = 9 ORDER BY goods_id DESC LIMIT 0, 10
+SELECT * FROM yy_category WHERE is_delete = 0 ORDER BY sort ASC
+SELECT price FROM yy_offer WHERE role_id = 4 AND goods_id = 5 ORDER BY offer_id DESC LIMIT 1
+SELECT price FROM yy_offer WHERE role_id = 4 AND goods_id = 4 ORDER BY offer_id DESC LIMIT 1
+SELECT price FROM yy_goods WHERE goods_id = 4 LIMIT 1
+SELECT price FROM yy_offer WHERE role_id = 4 AND goods_id = 2 ORDER BY offer_id DESC LIMIT 1
+SELECT price FROM yy_goods WHERE goods_id = 2 LIMIT 1
+
+
+/offer.php?do=offerlist&category_id=9&_=1504838678300
+SELECT count(*) as count FROM yy_goods a LEFT JOIN yy_category b ON a.category_id = b.cid WHERE  a.is_delete = 0 AND a.is_show = 0 AND a.category_id = 9 LIMIT 1
+SELECT * FROM yy_goods a LEFT JOIN yy_category b ON a.category_id = b.cid WHERE  a.is_delete = 0 AND a.is_show = 0 AND a.category_id = 9 ORDER BY goods_id DESC LIMIT 0, 10
+SELECT * FROM yy_category WHERE is_delete = 0 ORDER BY sort ASC
+SELECT price FROM yy_offer WHERE role_id = 2 AND goods_id = 5 ORDER BY offer_id DESC LIMIT 1
+SELECT price FROM yy_offer WHERE role_id = 2 AND goods_id = 4 ORDER BY offer_id DESC LIMIT 1
+SELECT price FROM yy_goods WHERE goods_id = 4 LIMIT 1
+SELECT price FROM yy_offer WHERE role_id = 2 AND goods_id = 2 ORDER BY offer_id DESC LIMIT 1
+SELECT price FROM yy_goods WHERE goods_id = 2 LIMIT 1
+
+
+/offer.php?do=offerlist&category_id=9&_=1504838678302
+SELECT count(*) as count FROM yy_goods a LEFT JOIN yy_category b ON a.category_id = b.cid WHERE  a.is_delete = 0 AND a.is_show = 0 AND a.category_id = 9 LIMIT 1
+SELECT * FROM yy_goods a LEFT JOIN yy_category b ON a.category_id = b.cid WHERE  a.is_delete = 0 AND a.is_show = 0 AND a.category_id = 9 ORDER BY goods_id DESC LIMIT 0, 10
+SELECT * FROM yy_category WHERE is_delete = 0 ORDER BY sort ASC
+SELECT price FROM yy_offer WHERE role_id = 2 AND goods_id = 5 ORDER BY offer_id DESC LIMIT 1
+SELECT price FROM yy_offer WHERE role_id = 2 AND goods_id = 4 ORDER BY offer_id DESC LIMIT 1
+SELECT price FROM yy_goods WHERE goods_id = 4 LIMIT 1
+SELECT price FROM yy_offer WHERE role_id = 2 AND goods_id = 2 ORDER BY offer_id DESC LIMIT 1
+SELECT price FROM yy_goods WHERE goods_id = 2 LIMIT 1
+
+
+/goods.php?do=offerprice&goods_id=5&_=1504838678304
+SELECT * FROM yy_role WHERE is_delete = 0
+SELECT * FROM yy_goods WHERE goods_id = 5 LIMIT 1
+SELECT price FROM yy_offer WHERE role_id = 2 AND goods_id = 5 ORDER BY offer_id DESC LIMIT 1
+SELECT price FROM yy_offer WHERE role_id = 3 AND goods_id = 5 ORDER BY offer_id DESC LIMIT 1
+SELECT price FROM yy_offer WHERE role_id = 4 AND goods_id = 5 ORDER BY offer_id DESC LIMIT 1
+SELECT price FROM yy_offer WHERE role_id = 5 AND goods_id = 5 ORDER BY offer_id DESC LIMIT 1
+
+
+/goods.php?do=offerprice&goods_id=5&_=1504840369794
+SELECT * FROM yy_role WHERE is_delete = 0
+SELECT * FROM yy_goods WHERE goods_id = 5 LIMIT 1
+SELECT * FROM yy_offer WHERE role_id = 2 AND goods_id = 5 ORDER BY offer_id DESC LIMIT 1
+SELECT * FROM yy_offer WHERE role_id = 3 AND goods_id = 5 ORDER BY offer_id DESC LIMIT 1
+SELECT * FROM yy_offer WHERE role_id = 4 AND goods_id = 5 ORDER BY offer_id DESC LIMIT 1
+SELECT * FROM yy_offer WHERE role_id = 5 AND goods_id = 5 ORDER BY offer_id DESC LIMIT 1
+
+
+/offer.php?do=offerlist&category_id=9&_=1504840369796
+SELECT count(*) as count FROM yy_goods a LEFT JOIN yy_category b ON a.category_id = b.cid WHERE  a.is_delete = 0 AND a.is_show = 0 AND a.category_id = 9 LIMIT 1
+SELECT * FROM yy_goods a LEFT JOIN yy_category b ON a.category_id = b.cid WHERE  a.is_delete = 0 AND a.is_show = 0 AND a.category_id = 9 ORDER BY goods_id DESC LIMIT 0, 10
+SELECT * FROM yy_category WHERE is_delete = 0 ORDER BY sort ASC
+SELECT price FROM yy_offer WHERE role_id = 2 AND goods_id = 5 ORDER BY offer_id DESC LIMIT 1
+SELECT price FROM yy_offer WHERE role_id = 2 AND goods_id = 4 ORDER BY offer_id DESC LIMIT 1
+SELECT price FROM yy_goods WHERE goods_id = 4 LIMIT 1
+SELECT price FROM yy_offer WHERE role_id = 2 AND goods_id = 2 ORDER BY offer_id DESC LIMIT 1
+SELECT price FROM yy_goods WHERE goods_id = 2 LIMIT 1
+
+
+/offer.php?do=offerlist&category_id=9&_=1504840369798
+SELECT count(*) as count FROM yy_goods a LEFT JOIN yy_category b ON a.category_id = b.cid WHERE  a.is_delete = 0 AND a.is_show = 0 AND a.category_id = 9 LIMIT 1
+SELECT * FROM yy_goods a LEFT JOIN yy_category b ON a.category_id = b.cid WHERE  a.is_delete = 0 AND a.is_show = 0 AND a.category_id = 9 ORDER BY goods_id DESC LIMIT 0, 10
+SELECT * FROM yy_category WHERE is_delete = 0 ORDER BY sort ASC
+SELECT price FROM yy_offer WHERE role_id = 2 AND goods_id = 5 ORDER BY offer_id DESC LIMIT 1
+SELECT price FROM yy_offer WHERE role_id = 2 AND goods_id = 4 ORDER BY offer_id DESC LIMIT 1
+SELECT price FROM yy_goods WHERE goods_id = 4 LIMIT 1
+SELECT price FROM yy_offer WHERE role_id = 2 AND goods_id = 2 ORDER BY offer_id DESC LIMIT 1
+SELECT price FROM yy_goods WHERE goods_id = 2 LIMIT 1
+
+
+/offer.php?do=offerlist&category_id=9&_=1504840369800
+SELECT count(*) as count FROM yy_goods a LEFT JOIN yy_category b ON a.category_id = b.cid WHERE  a.is_delete = 0 AND a.is_show = 0 AND a.category_id = 9 LIMIT 1
+SELECT * FROM yy_goods a LEFT JOIN yy_category b ON a.category_id = b.cid WHERE  a.is_delete = 0 AND a.is_show = 0 AND a.category_id = 9 ORDER BY goods_id DESC LIMIT 0, 10
+SELECT * FROM yy_category WHERE is_delete = 0 ORDER BY sort ASC
+SELECT price FROM yy_offer WHERE role_id = 2 AND goods_id = 5 ORDER BY offer_id DESC LIMIT 1
+SELECT price FROM yy_offer WHERE role_id = 2 AND goods_id = 4 ORDER BY offer_id DESC LIMIT 1
+SELECT price FROM yy_goods WHERE goods_id = 4 LIMIT 1
+SELECT price FROM yy_offer WHERE role_id = 2 AND goods_id = 2 ORDER BY offer_id DESC LIMIT 1
+SELECT price FROM yy_goods WHERE goods_id = 2 LIMIT 1
+
+
+/offer.php?do=offerlist&category_id=9&_=1504840369801
+SELECT count(*) as count FROM yy_goods a LEFT JOIN yy_category b ON a.category_id = b.cid WHERE  a.is_delete = 0 AND a.is_show = 0 AND a.category_id = 9 LIMIT 1
+SELECT * FROM yy_goods a LEFT JOIN yy_category b ON a.category_id = b.cid WHERE  a.is_delete = 0 AND a.is_show = 0 AND a.category_id = 9 ORDER BY goods_id DESC LIMIT 0, 10
+SELECT * FROM yy_category WHERE is_delete = 0 ORDER BY sort ASC
+SELECT price FROM yy_offer WHERE role_id = 2 AND goods_id = 5 ORDER BY offer_id DESC LIMIT 1
+SELECT price FROM yy_offer WHERE role_id = 2 AND goods_id = 4 ORDER BY offer_id DESC LIMIT 1
+SELECT price FROM yy_goods WHERE goods_id = 4 LIMIT 1
+SELECT price FROM yy_offer WHERE role_id = 2 AND goods_id = 2 ORDER BY offer_id DESC LIMIT 1
+SELECT price FROM yy_goods WHERE goods_id = 2 LIMIT 1
+
+
+/offer.php?do=offerlist&category_id=&_=1504857113727
+SELECT count(*) as count FROM yy_goods a LEFT JOIN yy_category b ON a.category_id = b.cid WHERE  a.is_delete = 0 AND a.is_show = 0 LIMIT 1
+SELECT * FROM yy_goods a LEFT JOIN yy_category b ON a.category_id = b.cid WHERE  a.is_delete = 0 AND a.is_show = 0 ORDER BY goods_id DESC LIMIT 0, 10
+SELECT * FROM yy_category WHERE is_delete = 0 ORDER BY sort ASC
+SELECT price FROM yy_offer WHERE role_id = 2 AND goods_id = 5 ORDER BY offer_id DESC LIMIT 1
+SELECT price FROM yy_offer WHERE role_id = 2 AND goods_id = 4 ORDER BY offer_id DESC LIMIT 1
+SELECT price FROM yy_goods WHERE goods_id = 4 LIMIT 1
+SELECT price FROM yy_offer WHERE role_id = 2 AND goods_id = 3 ORDER BY offer_id DESC LIMIT 1
+SELECT price FROM yy_goods WHERE goods_id = 3 LIMIT 1
+SELECT price FROM yy_offer WHERE role_id = 2 AND goods_id = 2 ORDER BY offer_id DESC LIMIT 1
+SELECT price FROM yy_goods WHERE goods_id = 2 LIMIT 1
+
+

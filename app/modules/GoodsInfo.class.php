@@ -271,6 +271,23 @@ class GoodsInfo
     	return $res ? $res : 0;
 
    	}
+   	
+   	//获取指定用户商品报价详情
+   	public function get_role_price_detail($role_id=0, $goods_id=0)
+   	{
+   		if($this->db == null || empty($role_id) || empty($goods_id))
+		{
+    		return false;
+    	}
+    	$sql = "SELECT * FROM yy_offer WHERE role_id = ".$role_id." AND goods_id = ".$goods_id." ORDER BY offer_id DESC";
+    	
+    	try{
+    		$res = $this->db->getRow($sql);
+    	}catch(exception $e){
+    		$this->_log(array( __CLASS__ . '.class.php line ' . __LINE__ , 'function '. __FUNCTION__ . ' err:'.$e->getMessage().'  sql execute false. sql = ' . $sql, date("Y-m-d H:i:s")));
+    	}
+    	return $res ? $res : array();
+   	}
 	
 
 	/**

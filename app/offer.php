@@ -29,7 +29,7 @@ class offer extends Action {
 	//商品列表
 	public function doOfferList()
 	{
-		$role_id = 4;
+		$role_id = 2;
 		$category_id 	= !empty($_GET['category_id']) ? intval($_GET['category_id']) : 0;
 		$current_page 	= !empty($_GET['page']) ? intval($_GET['page']) : 1;
 		
