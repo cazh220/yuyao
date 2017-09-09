@@ -99,6 +99,148 @@ class OrderInfo
     	$res = $this->db->getArray($sql);
     	return $res ? $res : array();  	
     }
+    
+    //获取的订单
+    public function get_order($param=array())
+    {
+    	if($this->db == null || empty($param['user_id']))
+		{
+    		return false;
+    	}
+    	
+    	$sql = "SELECT * FROM yy_order WHERE is_delete = 0 AND order_status = ".$param['order_status']." AND operator_id = ".$param['user_id'];//echo $sql;die;
+    	
+    	$res = $this->db->getArray($sql);
+    	return $res ? $res : array();  	
+    }
+    
+    //移除订单内商品
+    public function remove_goods($goods_id=0, $order_id=0)
+    {
+    	if($this->db == null || empty($goods_id) || empty($order_id))
+		{
+    		return false;
+    	}
+    	
+    	$sql = "DELETE FROM yy_order_goods WHERE goods_id = {$goods_id} AND order_id = {$order_id}";
+    	
+    	try{
+    		$res = $this->db->exec($sql);
+    	}catch(exception $e){
+    		$this->_log(array( __CLASS__ . '.class.php line ' . __LINE__ , 'function '. __FUNCTION__ . ' err:'.$e->getMessage().'  sql execute false. sql = ' . $sql, date("Y-m-d H:i:s")));
+    		$this->db->exec("ROLLBACK");
+			return false;
+    	}
+    	
+    	return true;
+    }
+    
+    //更新订单信息
+    public function confirm_order($order=array(), $order_goods=array())
+    {
+    	if($this->db == null || empty($order) || empty($order_goods))
+		{
+    		return false;
+    	}
+    	
+    	$this->db->exec("START TRANSACTION");
+    	foreach($order_goods as $key => $val)
+    	{
+    		$sql = "UPDATE yy_order_goods SET goods_num = ".$val['goods_num']." WHERE goods_id = ".$val['goods_id']." AND order_id = ".$val['order_id'];
+    		
+    		try{
+	    		$res = $this->db->exec($sql);
+	    	}catch(exception $e){
+	    		$this->_log(array( __CLASS__ . '.class.php line ' . __LINE__ , 'function '. __FUNCTION__ . ' err:'.$e->getMessage().'  sql execute false. sql = ' . $sql, date("Y-m-d H:i:s")));
+	    		$this->db->exec("ROLLBACK");
+				return false;
+	    	}
+    		
+    	}
+    	
+    	//更改订单状态
+    	$sql  = "UPDATE yy_order SET order_status = 1 WHERE order_id = ".$order['order_id'];
+    	try{
+    		$res = $this->db->exec($sql);
+    	}catch(exception $e){
+    		$this->_log(array( __CLASS__ . '.class.php line ' . __LINE__ , 'function '. __FUNCTION__ . ' err:'.$e->getMessage().'  sql execute false. sql = ' . $sql, date("Y-m-d H:i:s")));
+    		$this->db->exec("ROLLBACK");
+			return false;
+    	}
+    	
+    	
+    	$this->db->exec("COMMIT");
+		return true;
+    }
+    
+    //检查订单信息
+    public function get_unconfirm_order($user_id = 0)
+    {
+    	if($this->db == null || empty($user_id))
+		{
+    		return false;
+    	}
+    	
+    	$sql = "SELECT * FROM yy_order WHERE operator_id = {$user_id} AND order_status = 0 LIMIT 1";
+    	try{
+    		$order = $this->db->getArray($sql);
+    	}catch(exception $e){
+    		echo $e->getMessage();die;
+    	}
+    	
+    	return isset($order[0]) ? $order[0] : array();
+    }
+    
+    //添加新商品
+    public function add_new_order_goods($order=array(), $order_goods=array())
+    {
+    	if($this->db == null || empty($order) || empty($order_goods))
+		{
+    		return false;
+    	}
+    	
+    	$this->db->exec("START TRANSACTION");
+    	foreach($order_goods as $key => $val)
+    	{
+    		$sql = "INSERT INTO yy_order_goods SET order_id = ".$val['order_id'].", goods_id = ".$val['goods_id'].", goods_num = 1";
+    		try{
+	    		$res = $this->db->exec($sql);
+	    	}catch(exception $e){
+	    		$this->_log(array( __CLASS__ . '.class.php line ' . __LINE__ , 'function '. __FUNCTION__ . ' err:'.$e->getMessage().'  sql execute false. sql = ' . $sql, date("Y-m-d H:i:s")));
+	    		$this->db->exec("ROLLBACK");
+				return false;
+	    	}
+    	}	
+    	
+    	//更新订单
+    	$sql = "UPDATE yy_order SET total_amount = ".$order['total_amount'].", total_num = ".$order['total_num']." WHERE order_id = ".$order['order_id'];
+    	
+    	try{
+    		$res = $this->db->exec($sql);
+    	}catch(exception $e){
+    		$this->_log(array( __CLASS__ . '.class.php line ' . __LINE__ , 'function '. __FUNCTION__ . ' err:'.$e->getMessage().'  sql execute false. sql = ' . $sql, date("Y-m-d H:i:s")));
+    		$this->db->exec("ROLLBACK");
+			return false;
+    	}
+    	
+    	$this->db->exec("COMMIT");
+		return true;
+    }
+    
+    //获取订单商品明显
+    public function get_order_goods($order_id=0)
+    {
+    	if($this->db == null || empty($order_id))
+		{
+    		return false;
+    	}
+    	
+    	$sql = "SELECT * FROM yy_order a LEFT JOIN yy_order_goods b ON a.order_id = b.order_id LEFT JOIN yy_goods c ON b.goods_id = c.goods_id";
+    	
+    	$res = $this->db->getArray($sql);
+    	
+    	return $res ? $res : array();
+    }
 
 	/**
 	 * 数据更新失败记录日志，并标识操作失败

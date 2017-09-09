@@ -1,41 +1,37 @@
 
 <div class="pageContent">
-	<form method="post" action="goods.php?do=addgoodact" class="pageForm required-validate" onsubmit="return validateCallback(this, navTabAjaxDone);">
+	<form method="post" action="myorder.php?do=confirmorder" class="pageForm required-validate" onsubmit="return validateCallback(this, navTabAjaxDone);">
 		<div class="pageFormContent" layoutH="56">
 			
 			<table width="100%" style="margin: 20px; text-align: center;" >
 				<tr>
 					<th width="20%"><strong>商品名称</strong></th>
 					<th width="20%">商品价格</th>
-					<th width="20%">购买数量</th>
-					<th width="20%">商品库存</th>
+					<th width="15%">购买数量</th>
+					<th width="15%">单位</th>
+					<th width="10%">商品库存</th>
 					<th width="20%">操作</th>
 				</tr>
 				<tr>
-					<td colspan="5"><div class="divider"></div></td>
+					<td colspan="6"><div class="divider"></div></td>
 				</tr>
 				{if $list}
 				{foreach from=$list item=item key=key}
 				<tr>
 					<td style="line-height: 60px;">{$item.goods_name}</td>
 					<td>{$item.offer_price}</td>
-					<td><input type="text" name="goods_nums[]" id="goods_num" value="{$item.goods_num}"></td>
+					<td><input type="text" name="goods_nums[]" id="goods_num_{$item.goods_id}" value="{$item.goods_num}" onblur="check_num(this.value, {$item.stock}, this)" class="required"></td>
+					<td>{$item.unit}</td>
 					<td>{$item.stock}</td>
 					<td>
-						<input type="hidden" name="order_id[]" id="order_id" value="{$item.order_id}">
-						<input type="hidden" name="goods_id[]" id="goods_id" value="{$item.goods_id}">
-						<a href="">删除</a>
+						<input type="hidden" name="order_id[]" id="order_id_{$item.goods_id}" value="{$item.order_id}">
+						<input type="hidden" name="goods_id[]" id="goods_id_{$item.goods_id}" value="{$item.goods_id}">
+						<a href="#" onclick="remove_goods(this, {$item.goods_id}, {$item.order_id})">移除</a>
 					</td>
 				</tr>
 				{/foreach}
 				{/if}
-				<tr id="g1">
-					<td style="line-height: 60px;">商品啊啊</td>
-					<td>12</td>
-					<td><input type="text" name="goods_nums[]" id="goods_num" value="1" disabled="disabled"></td>
-					<td>100</td>
-					<td><a href="">删除</a></td>
-				</tr>
+
 			</table>
 
 		
@@ -51,3 +47,48 @@
 		</div>
 	</form>
 </div>
+
+<script type="text/javascript">
+{literal}
+function check_num(num, stock, o)
+{
+	//判断整数
+	var reg = /^\+?[1-9]\d*$/;
+	if(!reg.test(num))
+	{
+		alert('请输入大于0的正整数');
+		$(o).addClass("error");
+		return false;
+	}else if(num > stock){
+		alert('库存不足');
+		$(o).addClass("error");
+		return false;
+	}
+
+}
+
+function remove_goods(o, goods_id, order_id)
+{
+	$(o).parent().parent().css("display","none");
+	$("#goods_num_"+goods_id).attr("disabled", true);
+	$("#order_id_"+goods_id).attr("disabled", true);
+	$("#goods_id_"+goods_id).attr("disabled", true);
+	//url = "myorder.php?do=removegood&goods_id={$item.goods_id}&order_id={$item.order_id}";
+	//console.log($(o).parent().parent().css("display","none"));
+	$.ajax({
+		type:"get",
+		url:"myorder.php?do=removegood",
+		data:"order_id="+order_id+"&goods_id="+goods_id,
+		dataType:"json",
+		success:function(msg){
+			if(msg.status==1)
+			{
+				alert(msg.message);
+				return false;
+			}
+		}
+	});
+	
+}
+{/literal}
+</script>
