@@ -1,9 +1,9 @@
 <?php
 /**
- * 角色用户处理
+ *货车处理
  */
  
-class RoleInfo
+class TruckInfo
 {
 	/**
 	 * 应用程序对象
@@ -29,29 +29,29 @@ class RoleInfo
         mysql_query("set names utf8");
     }
     
-    //获取所有角色用户
-    public function get_all_roles()
+    //获取所有货车
+    public function get_all_trucks()
     {
     	if($this->db == null)
 		{
     		return false;
     	}
     	
-    	$sql = "SELECT * FROM yy_role WHERE is_delete = 0";
+    	$sql = "SELECT * FROM yy_truck WHERE is_delete = 0";
     	
     	$res = $this->db->getArray($sql);
     	return $res;
     }
     
-    //添加新角色
-    public function add_new_role($role_name='')
+    //添加货车
+    public function add_new_truck($truck_name='', $mobile='')
     {
-    	if($this->db == null || empty($role_name))
+    	if($this->db == null || empty($truck_name) || empty($mobile))
 		{
     		return false;
     	}
     	
-    	$sql = "INSERT INTO yy_role(role_name, create_time, update_time)VALUES('".$role_name."', NOW(), NOW())";
+    	$sql = "INSERT INTO yy_truck(truck_name, mobile, create_time, update_time)VALUES('".$truck_name."', '".$mobile."', NOW(), NOW())";
     	
     	try{
     		$res = $this->db->exec($sql);
@@ -63,30 +63,29 @@ class RoleInfo
     	return true;
     }
     
-    //获取角色
-    public function get_role($role_id=0)
+    //获取货车
+    public function get_truck($truck_id=0)
     {
-    	if($this->db == null || empty($role_id))
+    	if($this->db == null || empty($truck_id))
 		{
     		return false;
     	}
     	
-    	$sql = "SELECT * FROM yy_role WHERE role_id = ".$role_id;
+    	$sql = "SELECT * FROM yy_truck WHERE truck_id = ".$truck_id;
     	
     	$res = $this->db->getRow($sql);
-    	
     	return $res ? $res : array();
     }
     
-    //编辑
-    public function edit_role($role_name='', $role_id=0)
+    //编辑货车
+    public function edit_truck($truck_name='', $mobile='', $truck_id='')
     {
-    	if($this->db == null || empty($role_id) || empty($role_name))
+    	if($this->db == null || empty($truck_name) || empty($mobile) || empty($truck_id))
 		{
     		return false;
     	}
     	
-    	$sql = "UPDATE yy_role SET role_name = '".$role_name."' WHERE role_id = ".$role_id;
+    	$sql = "UPDATE yy_truck SET truck_name = '".$truck_name."', mobile = '".$mobile."' WHERE truck_id = ".$truck_id;
     	
     	try{
     		$res = $this->db->exec($sql);
@@ -98,16 +97,15 @@ class RoleInfo
     	return true;
     }
     
-    //删除角色
-    public function remove_role($role_id='')
+    //移除货车
+    public function remove_truck($truck_id=0)
     {
-    	if($this->db == null || empty($role_id))
+    	if($this->db == null || empty($truck_id))
 		{
     		return false;
     	}
     	
-    	$sql = "UPDATE yy_role SET is_delete = 1 WHERE role_id = ".$role_id;
-    	
+    	$sql = "UPDATE yy_truck SET is_delete = 1 WHERE truck_id = ".$truck_id;
     	try{
     		$res = $this->db->exec($sql);
     	}catch(exception $e){

@@ -33,44 +33,30 @@
 <div class="pageContent">
 	<div class="panelBar">
 		<ul class="toolBar">
-			<li><a class="add" href="user.php?do=adduser" target="navTab" rel="pagination1"><span>添加</span></a></li>
-			<li class="line">line</li>
-			<li><a class="icon" href="demo/common/dwz-team.xls" target="dwzExport" targetType="navTab" title="实要导出这些记录吗?"><span>导出EXCEL</span></a></li>
+			<li><a class="add" href="role.php?do=addrole" target="navTab" rel="pagination1"><span>添加</span></a></li>
 		</ul>
 	</div>
 	<table class="table" width="1200" layoutH="138">
 		<thead>
 			<tr>
-				<th width="5%"><input type="checkbox" group="ids" class="checkboxCtrl"></th>
-				<th width="5%" orderField="accountNo" class="asc">用户编号</th>
-				<th>账号名称</th>
-				<th width="8%">真实姓名</th>
-				<th width="8%">客户分类</th>
-				<th width="10%">公司名称</th>
-				<th width="14%" align="center">公司地址</th>
-				<th width="8%">联系电话</th>
-				<th width="12%">配送分车</th>
-				<th width="10%">创建时间</th>
-				<th width="12%">操作</th>
+				<th width="10%" orderField="accountNo" class="asc">客户分类ID</th>
+				<th>客户分类名称</th>
+				<th width="20%">创建时间</th>
+				<th width="20%">更新时间</th>
+				<th width="20%">操作</th>
 			</tr>
 		</thead>
 		<tbody>
-			{if $users}
-			{foreach from=$users item=item key=key}
+			{if $roles}
+			{foreach from=$roles item=item key=key}
 			<tr target="sid_user" rel={$key+1}>
-				<td><input name="ids" value="{$item.goods_id}" type="checkbox"></td>
-				<td>{$item.user_id}</td>
-				<td>{$item.username}</td>
-				<td>{$item.realname}</td>
 				<td>{$item.role_id}</td>
-				<td>{$item.company_name}</td>
-				<td>{$item.address}</td>
-				<td>{$item.mobile}</td>
-				<td>{$item.truck}</td>
+				<td>{$item.role_name}</td>
 				<td>{$item.create_time}</td>
+				<td>{$item.update_time}</td>
 				<td>
-					<a title="删除" target="navTab" href="user.php?do=removeuser&user_id={$item.user_id}" class="btnDel">删除</a>
-					<a title="修改" target="navTab" href="user.php?do=edituser&user_id={$item.user_id}"  class="btnEdit">修改</a>
+					<a title="删除" target="navTab" href="role.php?do=removerole&role_id={$item.role_id}" class="btnDel">删除</a>
+					<a title="修改" target="navTab" href="role.php?do=editrole&role_id={$item.role_id}"  class="btnEdit">修改</a>
 				</td>
 			</tr>
 			{/foreach}
