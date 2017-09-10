@@ -26,6 +26,7 @@
 					<td>
 						<input type="hidden" name="order_id[]" id="order_id_{$item.goods_id}" value="{$item.order_id}">
 						<input type="hidden" name="goods_id[]" id="goods_id_{$item.goods_id}" value="{$item.goods_id}">
+						<input type="hidden" name="offer_price[]" id="offer_price_{$item.goods_id}" value="{$item.good_price}">
 						<a href="#" onclick="remove_goods(this, {$item.goods_id}, {$item.order_id})">移除</a>
 					</td>
 				</tr>

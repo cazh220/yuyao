@@ -75,8 +75,8 @@
 			</tr>
 		</thead>
 		<tbody>
-			{if $list}
-			{foreach from=$list item=item key=key}
+			{if $order}
+			{foreach from=$order item=item key=key}
 			<tr target="sid_user" rel={$key+1}>
 				<td>{$item.order_id}</td>
 				<td>{$item.order_no}</td>
@@ -89,7 +89,9 @@
 				<td>{$item.confirm_time}</td>
 				<td>{$item.send_time}</td>
 				<td>
-					<a title="明细" target="dialog" href="order.php?do=ordergoods&order_id={$item.order_id}" class="btnInfo" rel="dlg_page10" mask="true">明细</a>
+					<a title="明细" target="dialog" href="order.php?do=ordergoods&order_id={$item.order_id}" class="btnInfo" rel="ordergoods" mask="true">明细</a>
+					<a title="打印订单" target="dialog" href="order.php?do=ordergoods&order_id={$item.order_id}" class="btnAttach" rel="dlg_page10" mask="true">打印本订单</a>
+					<a title="配送分车" target="dialog" href="send.php?do=assigntruck&order_id={$item.order_id}" class="btnEdit" rel="dlg_page10" mask="true">打印本订单</a>
 				</td>
 			</tr>
 			{/foreach}
@@ -106,10 +108,10 @@
 				<option value="100">100</option>
 				<option value="200">200</option>
 			</select>
-			<span>条，共0条</span>
+			<span>条，共{$page_info.total}条</span>
 		</div>
 		
-		<div class="pagination" targetType="navTab" totalCount="200" numPerPage="20" pageNumShown="10" currentPage="1"></div>
+		<div class="pagination" targetType="navTab" totalCount="{$page_info.total}" numPerPage="{$page_info.page_size}" pageNumShown="{$page_info.page_count}" currentPage="{$page_info.current_page}"></div>
 
 	</div>
 </div>

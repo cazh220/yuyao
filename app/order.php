@@ -32,6 +32,7 @@ class order extends Action {
 	{
 		$operator_id = 1;
 		$operator = '曹政';
+		$role_id = 4;
 		$ids = !empty($_REQUEST['ids']) ? trim($_REQUEST['ids']) : '';
 		$id_set = explode(",", $ids);
 		
@@ -51,23 +52,28 @@ class order extends Action {
 			$total_amount = 0;
 			foreach($id_set as $key => $val)
 			{
-				//获取商品
-				$price = $obj_good->get_good_price($val);
+				//获取商品实际价格
+				$offer_price = $obj_good->get_role_good_price($role_id, $val);
+				if(empty($offer_price))
+				{
+					$offer_price = $obj_good->get_good_price($val);
+				}
+				
 				$order_goods[$key] = array(
 					'goods_id'	=> $val,
 					'goods_num'	=> 1,
-					'order_id'	=> $order['order_id']
+					'order_id'	=> $order['order_id'],
+					'good_price'	=> $offer_price
 				);
 				
 				$total_num++;
-				$total_amount += $price;
+				$total_amount += $offer_price;
 			}
 			$_order = array(
-				'total_amount'	=> $order['total_amount']+$total_amount,
+				'total_amount'	=> number_format($order['total_amount']+$total_amount, 2, '.', ''),
 				'total_num'		=> $order['total_num']+$total_num,
 				'order_id'		=> $order['order_id']
 			);
-			//print_r($_order);print_r($order_goods);die;
 			//更新订单
 			$res = $obj_order->add_new_order_goods($_order, $order_goods);
 		}
@@ -88,13 +94,20 @@ class order extends Action {
 			foreach($id_set as $key => $val)
 			{
 				//获取商品
-				$price = $obj_good->get_good_price($val);
+				//$price = $obj_good->get_good_price($val);
+				//获取商品实际价格
+				$offer_price = $obj_good->get_role_good_price($role_id, $val);
+				if(empty($offer_price))
+				{
+					$offer_price = $obj_good->get_good_price($val);
+				}
 				$order_goods[$key] = array(
 					'goods_id'	=> $val,
 					'goods_num'	=> 1,
+					'good_price'	=> $offer_price
 				);
 				$total_num++;
-				$total_amount += $price;
+				$total_amount += $offer_price;
 			}
 			
 			$order['total_num'] = $total_num;
@@ -149,6 +162,62 @@ class order extends Action {
 		$page->value('order_goods',$order_goods);
 		//$page->value('main','myorder');
 		$page->params['template'] = 'order_goods.html';
+		$page->output();
+	}
+	
+	//获取所有用户订单
+	public function doOrderList()
+	{
+		$current_page	= !empty($_GET['current_page']) ? intval($_GET['current_page']) : 1;
+		importModule("OrderInfo","class");
+		$obj_order = new OrderInfo;
+		
+		$param = array(
+			'current_page'	=> $current_page,
+			'page_size'		=> 10
+		);
+		
+		$res = $obj_order->get_order_list($param);
+		
+		$pageinfo = array(
+			'total'	=> $res['count'],
+			'page_size'	=> 10,
+			'current_page'	=> $current_page,
+			'page_count'	=> ceil($res['count']/10)
+		);
+		//print_r($pageinfo);die;
+		$page = $this->app->page();
+		$page->value('order',$res['list']);
+		$page->value('page_info',$pageinfo);
+		$page->params['template'] = 'order_list.html';
+		$page->output();
+	}
+	
+	//获取分车订单
+	public function doTruckOrder()
+	{
+		$current_page	= !empty($_GET['current_page']) ? intval($_GET['current_page']) : 1;
+		//获取货车订单
+		importModule("SendInfo","class");
+		$obj_send = new SendInfo;
+		$param = array(
+			'current_page'	=> $current_page,
+			'page_size'		=> 10
+		);
+		//var_dump($param);die;
+		$order = $obj_send->get_assign_order(1, $param);
+		
+		$pageinfo = array(
+			'total'	=> $order['count'],
+			'page_size'	=> 10,
+			'current_page'	=> $current_page,
+			'page_count'	=> ceil($order['count']/10)
+		);
+
+		$page = $this->app->page();
+		$page->value('order',$order['list']);
+		$page->value('page_info',$pageinfo);
+		$page->params['template'] = 'truck_order_list.html';
 		$page->output();
 	}
 	

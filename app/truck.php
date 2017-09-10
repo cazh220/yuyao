@@ -142,6 +142,17 @@ class truck extends Action {
 		}
 	}
 	
+	//配送分车
+	public function doAssignTruck()
+	{
+		$order_id	= !empty($_GET['order_id']) ? intval($_GET['order_id']) : '';
+		
+		//生成一个配送号
+		$send_no = 'S'.date("YmdHis").rand(1000, 9999);
+		//检查是否有配送
+		
+	}
+	
 	
 
 	

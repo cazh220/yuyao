@@ -102,12 +102,15 @@ class myorder extends Action {
 	//订单确认
 	public function doConfirmOrder()
 	{
-		$goods_num_arr = !empty($_POST['goods_nums']) ? $_POST['goods_nums'] : array();
-		$order_id_arr  = !empty($_POST['order_id']) ? $_POST['order_id'] : array();
-		$goods_id_arr  = !empty($_POST['goods_id']) ? $_POST['goods_id'] : array();
+		$goods_num_arr 	= !empty($_POST['goods_nums']) ? $_POST['goods_nums'] : array();
+		$order_id_arr  	= !empty($_POST['order_id']) ? $_POST['order_id'] : array();
+		$goods_id_arr  	= !empty($_POST['goods_id']) ? $_POST['goods_id'] : array();
+		$offer_price_arr= !empty($_POST['offer_price']) ? $_POST['offer_price'] : array();
 		
 		$order_id = isset($order_id_arr[0]) ? $order_id_arr[0] : 0;
 		$order_goods = array();
+		$total_num = 0;
+		$total_amount = 0;
 		if($goods_id_arr)
 		{
 			foreach($goods_id_arr as $key => $val)
@@ -117,11 +120,15 @@ class myorder extends Action {
 					'order_id'	=> $order_id,
 					'goods_num'	=> $goods_num_arr[$key]
 				);
+				$total_num += $goods_num_arr[$key];
+				$total_amount += $goods_num_arr[$key]*$offer_price_arr[$key];
 			}
 		}
 		
 		$order = array(
-			'order_id'		=> $order_id
+			'order_id'		=> $order_id,
+			'total_num'		=> $total_num,
+			'total_amount'	=> $total_amount
 		);
 		//print_r($order);print_r($order_goods);die;
 		importModule("OrderInfo","class");
